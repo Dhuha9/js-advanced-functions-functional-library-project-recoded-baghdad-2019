@@ -91,16 +91,34 @@ const fi = (function () {
       return Object.values(object)
     },
     uniq: function (array, isSorted, callback) {
-      let uniqArr = function (arr, callback) {
-        arr.filter((x, index, arr) => {
-          return callback(x, index, array)
+      let uniqArr = function (arr, testCallback) {
+        return arr.filter((x, index, arr) => {
+          console.log("in filter " + testCallback(x, index, arr) + " x " + x)
+          return testCallback(x, index, arr)
+        })
+      }
+
+      let isFound = function (x, lookUpArray, testCallback) {
+        searchFor = testCallback(x)
+        return lookUpArray.find((x) => {
+          return searchFor === testCallback(x) ? true : false
+        })
+      }
+
+      let uniqArrWithCallback = function (array, callback) {
+        return array.filter((x, index, array) => {
+          return !isFound(x, array.slice(0, index), callback)
         })
       }
       let passToCallback = []
-      if (isSorted) {
-        passToCallback = uniqArr(array, ((x, index, n) => x != n[index + 1]));
+      if (callback === undefined) {
+        if (isSorted) {
+          return passToCallback = uniqArr(array, ((x, index, n) => x != n[index + 1]));
+        } else {
+          return passToCallback = uniqArr(array, ((x, index, n) => n.indexOf(x) == index));
+        }
       } else {
-        passToCallback = uniqArr(array, ((x, index, n) => n.indexOf(x) == index));
+        return uniqArrWithCallback(array, callback)
       }
     },
     flatten: function (array, shallow = false) {
