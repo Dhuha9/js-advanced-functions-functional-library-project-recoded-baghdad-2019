@@ -65,7 +65,9 @@ const fi = (function () {
 
     compact: function (array) {
       let newArray = []
-      newArray = array.filter(x => { if (!!x !== false) return x })
+      newArray = array.filter(x => { 
+        valueState=
+        if (!!x !== false) return x })
       return newArray
     },
 
