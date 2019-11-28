@@ -99,7 +99,7 @@ const fi = (function () {
       }
 
       let isFound = function (x, lookUpArray, testCallback) {
-        searchFor = testCallback(x)
+       let searchFor = testCallback(x)
         return lookUpArray.find((x) => {
           return searchFor === testCallback(x) ? true : false
         })
