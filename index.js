@@ -83,10 +83,10 @@ const fi = (function () {
       function flattenArray(subArray) {
 
         subArray.map(x => {
-          if (Array.isArray(x) && shallow == false) {
+          if (Array.isArray(x) && shallow === false) {
             flattenArray(x)
           }
-          else if (Array.isArray(x) && shallow == true && oneFunIttrations == true) {
+          else if (Array.isArray(x) && shallow === true && oneFunIttrations === true) {
             x.map(y => {
               n[i] = y
               i += 1
