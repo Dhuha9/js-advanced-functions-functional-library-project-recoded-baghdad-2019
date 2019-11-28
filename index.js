@@ -121,9 +121,9 @@ const fi = (function () {
       }
       if (callback === undefined) {
         if (isSorted) {
-          return passToCallback = uniqArray(array, ((x, index, n) => x != n[index + 1]));
+          return uniqArray(array, ((x, index, n) => x != n[index + 1]));
         } else {
-          return passToCallback = uniqArray(array, ((x, index, n) => n.indexOf(x) == index));
+          return uniqArray(array, ((x, index, n) => n.indexOf(x) == index));
         }
       } else {
         return uniqArrWithCallback(array, callback)
