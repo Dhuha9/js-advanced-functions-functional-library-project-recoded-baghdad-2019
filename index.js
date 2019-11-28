@@ -93,7 +93,6 @@ const fi = (function () {
     uniq: function (array, isSorted, callback) {
       let uniqArr = function (arr, testCallback) {
         return arr.filter((x, index, arr) => {
-          console.log("in filter " + testCallback(x, index, arr) + " x " + x)
           return testCallback(x, index, arr)
         })
       }
