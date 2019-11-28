@@ -6,115 +6,115 @@ const fi = (function () {
 
     each: function (collection, alert) {
       if (Array.isArray(collection)) {
-        collection.forEach((x, index, collection) => alert(x, index, collection))
+        collection.forEach((x, index, collection) => alert(x, index, collection));
       } else {
-        Object.keys(collection).forEach((key) => alert(collection[key], key, collection))
+        Object.keys(collection).forEach((key) => alert(collection[key], key, collection));
       }
       return collection;
     },
 
     map: function (collection, callback) {
-      let newCollection = []
+      let newCollection = [];
       if (Array.isArray(collection)) {
-        newCollection = collection.map((x, index, collection) => callback(x, index, collection))
+        newCollection = collection.map((x, index, collection) => callback(x, index, collection));
       } else {
-        newCollection = Object.keys(collection).map((key) => callback(collection[key], key, collection))
+        newCollection = Object.keys(collection).map((key) => callback(collection[key], key, collection));
       }
       return newCollection;
     },
 
     reduce: function (collection, alert, acc) {
       if (acc === undefined) {
-        return collection.reduce((total, x, collection) => alert(total, x, collection))
+        return collection.reduce((total, x, collection) => alert(total, x, collection));
       } else {
-        return collection.reduce((total, x, collection) => alert(total, x, collection), acc)
+        return collection.reduce((total, x, collection) => alert(total, x, collection), acc);
       }
     },
 
     find: function (collection, predicate) {
-      let truthyValue = collection.find(x => predicate(x))
-      return truthyValue
+      let truthyValue = collection.find(x => predicate(x));
+      return truthyValue;
     },
 
     filter: function (collection, predicate) {
-      let newCollection = []
-      newCollection = collection.filter(x => predicate(x))
+      let newCollection = [];
+      newCollection = collection.filter(x => predicate(x));
       return newCollection;
     },
 
     size: function (collection) {
       if (Array.isArray(collection)) {
-        return collection.length
+        return collection.length;
       } else {
-        return Object.keys(collection).length
+        return Object.keys(collection).length;
       }
     },
     first: function (array, n = 1) {
-      if (n == 1) return array[0]
-      else return array.slice(0, n)
+      if (n == 1) return array[0];
+      else return array.slice(0, n);
     },
 
     last: function (array, n) {
       if (n === undefined) {
-        return array[array.length - 1]
+        return array[array.length - 1];
       }
       else {
-        return array.slice(n * -1)
+        return array.slice(n * -1);
       }
     },
 
     compact: function (array) {
-      let newArray = []
+      let newArray = [];
       newArray = array.filter(x => { 
-        valueState=
-        if (!!x !== false) return x })
-      return newArray
+        valueState=!!x;
+        if (valueState !== false) return x });
+      return newArray;
     },
 
     sortBy: function (array, callback) {
-      let newArray = [...array]
-      newArray.sort((a, b) => callback(a) - callback(b))
-      return newArray
+      let newArray = [...array];
+      newArray.sort((a, b) => callback(a) - callback(b));
+      return newArray;
     },
 
     flatten: function (array, shallow = false) {
-      let n = []
-      let i = 0
-      let oneFunIttrations = true
+      let n = [];
+      let i = 0;
+      let oneFunIttrations = true;
 
       function flattenArray(subArray) {
 
         subArray.map(x => {
           if (Array.isArray(x) && shallow === false) {
-            flattenArray(x)
+            flattenArray(x);
           }
           else if (Array.isArray(x) && shallow === true && oneFunIttrations === true) {
             x.map(y => {
-              n[i] = y
-              i += 1
-            })
+              n[i] = y;
+              i += 1;
+            });
           }
           else {
-            n[i] = x
-            i += 1
+            n[i] = x;
+            i += 1;
           }
-        })
-        return n
+        });
+        return n;
       }
-      return flattenArray(array)
+      return flattenArray(array);
     },
 
     uniq: function (array, isSorted, callback) {
       let uniqArray = function (arr, testCallback) {
         return arr.filter((x, index, arr) => {
-          return testCallback(x, index, arr)
-        })
-      }
+          return testCallback(x, index, arr);
+        });
+      };
       let isFound = function (x, lookUpArray, testCallback) {
-        let searchFor = testCallback(x)
+        let searchFor = testCallback(x);
         return lookUpArray.find((x) => {
-          return searchFor === testCallback(x) ? true : false
-        })
+          return searchFor === testCallback(x) ? true : false;
+        });
       }
       let uniqArrWithCallback = function (array, callback) {
         return array.filter((x, index, array) => {
